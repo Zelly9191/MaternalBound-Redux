@@ -1,3 +1,6 @@
+#All New changes based on traslations found here: https://wikibound.info/wiki
+#Also a friend who knows japanese helped 
+#some things left unchanged due to being iconic
 0:
   Action: 1
   Argument:
@@ -420,7 +423,8 @@
   Help Text Pointer: item_descriptions.l_0xc53ae6
   Misc Flags:
   - paula can use
-  Name: Fry pan
+  Name: Frying pan
+#Fry pan
   Type: 16
 29:
   Action: 239
@@ -433,7 +437,8 @@
   Help Text Pointer: item_descriptions.l_0xc53af6
   Misc Flags:
   - paula can use
-  Name: Thick fry pan
+  Name: Thick frying pan
+#Thick fry pan
   Type: 16
 30:
   Action: 239
@@ -446,7 +451,8 @@
   Help Text Pointer: item_descriptions.l_0xc53b06
   Misc Flags:
   - paula can use
-  Name: Deluxe fry pan
+  Name: Deluxe frypan
+#Deluxe fry pan
   Type: 16
 31:
   Action: 239
@@ -459,7 +465,8 @@
   Help Text Pointer: item_descriptions.l_0xc53b16
   Misc Flags:
   - paula can use
-  Name: Chef's fry pan
+  Name: Chef's frypan
+#Chef's fry pan
   Type: 16
 32:
   Action: 239
@@ -472,7 +479,7 @@
   Help Text Pointer: item_descriptions.l_0xc53b26
   Misc Flags:
   - paula can use
-  Name: French fry pan
+  Name: French frypan
   Type: 16
 33:
   Action: 239
@@ -485,7 +492,8 @@
   Help Text Pointer: item_descriptions.l_0xc53b36
   Misc Flags:
   - paula can use
-  Name: Magic fry pan
+  Name: Magic frying pan
+#Magic fry pan
   Type: 16
 34:
   Action: 239
@@ -498,7 +506,8 @@
   Help Text Pointer: item_descriptions.l_0xc53b46
   Misc Flags:
   - paula can use
-  Name: Holy fry pan
+  Name: Angelic frypan
+#Holy fry pan
   Type: 16
 35:
   Action: 239
@@ -576,7 +585,8 @@
   Help Text Pointer: item_descriptions.l_0xc53bb6
   Misc Flags:
   - jeff can use
-  Name: Zip gun
+  Name: Astro mchn gun
+#Zip gun
   Type: 17
 41:
   Action: 239
@@ -589,7 +599,8 @@
   Help Text Pointer: item_descriptions.l_0xc53bc6
   Misc Flags:
   - jeff can use
-  Name: Laser gun
+  Name: Laser blaster
+#Laser gun
   Type: 17
 42:
   Action: 239
@@ -602,7 +613,8 @@
   Help Text Pointer: item_descriptions.l_0xc53bd6
   Misc Flags:
   - jeff can use
-  Name: Hyper beam
+  Name: Hyper blaster
+#Hyper beam
   Type: 17
 43:
   Action: 239
@@ -615,7 +627,8 @@
   Help Text Pointer: item_descriptions.l_0xc53be6
   Misc Flags:
   - jeff can use
-  Name: Crusher beam
+  Name: Crash blaster
+#Crusher beam
   Type: 17
 44:
   Action: 239
@@ -628,7 +641,8 @@
   Help Text Pointer: item_descriptions.l_0xc53bf6
   Misc Flags:
   - jeff can use
-  Name: Spectrum beam
+  Name: Rainbow blaster
+#Spectrum beam
   Type: 17
 45:
   Action: 239
@@ -641,7 +655,8 @@
   Help Text Pointer: item_descriptions.l_0xc53c06
   Misc Flags:
   - jeff can use
-  Name: Death ray
+  Name: Death blaster
+#Death ray
   Type: 17
 46:
   Action: 239
@@ -654,7 +669,8 @@
   Help Text Pointer: item_descriptions.l_0xc53c16
   Misc Flags:
   - jeff can use
-  Name: Baddest beam
+  Name: Baddest blaster
+#Baddest beam
   Type: 17
 47:
   Action: 239
@@ -667,7 +683,8 @@
   Help Text Pointer: item_descriptions.l_0xc53c26
   Misc Flags:
   - jeff can use
-  Name: Moon beam gun
+  Name: Moonbeam blaster
+#Moon beam gun
   Type: 17
 48:
   Action: 239
@@ -680,7 +697,8 @@
   Help Text Pointer: item_descriptions.l_0xc53c36
   Misc Flags:
   - jeff can use
-  Name: Gaia beam
+  Name: Gaia blaster
+#Gaia beam
   Type: 17
 49:
   Action: 239
@@ -776,7 +794,7 @@
   - ness can use
   - paula can use
   - poo can use
-  Name: Travel charm
+  Name: Travel charmZelly9191/MaternalBound-Redux
   Type: 20
 55:
   Action: 240
@@ -808,7 +826,8 @@
   - ness can use
   - paula can use
   - poo can use
-  Name: Crystal charm
+  Name: Glittering charm
+#Crystal charm
   Type: 20
 57:
   Action: 240
@@ -856,7 +875,8 @@
   - ness can use
   - paula can use
   - poo can use
-  Name: Rain pendant
+  Name: Droplet pendant
+#Rain pendant
   Type: 20
 60:
   Action: 240
@@ -1045,7 +1065,8 @@
   - ness can use
   - paula can use
   - poo can use
-  Name: Angel band
+  Name: Angelic bracelet
+#Angel band
   Type: 24
 72:
   Action: 240
@@ -1061,7 +1082,7 @@
   - ness can use
   - paula can use
   - poo can use
-  Name: Goddess band
+  Name: Goddess's band
   Type: 24
 73:
   Action: 240
@@ -1193,7 +1214,8 @@
   - ness can use
   - paula can use
   - poo can use
-  Name: Coin of serenity
+  Name: Serenity coin
+#Coin of serenity
   Type: 28
 82:
   Action: 240
@@ -1209,7 +1231,8 @@
   - ness can use
   - paula can use
   - poo can use
-  Name: Coin of defense
+  Name: Protection coin
+#Coin of defense
   Type: 28
 83:
   Action: 240
@@ -1225,7 +1248,8 @@
   - ness can use
   - paula can use
   - poo can use
-  Name: Lucky coin
+  Name: Warding coin
+#Lucky coin (The Lucky coin and Charm coin both have identical functions despite having different names. This is actually a translation oversight)
   Type: 28
 84:
   Action: 240
@@ -1286,7 +1310,8 @@
   Help Text Pointer: item_descriptions.l_0xc540e5
   Misc Flags:
   - poo can use
-  Name: Diadem of kings
+  Name: Bandana of Kings
+#Diadem of kings (why this was changed from bandanna idk) [maybe change to circlet?]
   Type: 28
 88:
   Action: 249
@@ -1372,7 +1397,8 @@
   - ness can use
   - paula can use
   - poo can use
-  Name: Fresh Egg
+  Name: Freshly-Laid egg
+#Fresh Egg
   Type: 32
 93:
   Action: 249
@@ -1608,7 +1634,8 @@
   - ness can use
   - paula can use
   - poo can use
-  Name: Can of fruit juice
+  Name: Orange Juice
+#Can of fruit juice
   Type: 36
 107:
   Action: 249
@@ -1829,7 +1856,8 @@
   - ness can use
   - paula can use
   - poo can use
-  Name: Sugar packet
+  Name: Powdered Sugar
+#Sugar packet
   Type: 40
 120:
   Action: 249
@@ -1846,7 +1874,8 @@
   - ness can use
   - paula can use
   - poo can use
-  Name: Tin of Cocoa
+  Name: Chocolate Chips
+#Tin of Cocoa
   Type: 40
 121:
   Action: 249
@@ -1863,7 +1892,8 @@
   - ness can use
   - paula can use
   - poo can use
-  Name: Carton of milk
+  Name: Sweet cond milk
+#Carton of milk
   Type: 40
 122:
   Action: 249
@@ -1880,7 +1910,8 @@
   - ness can use
   - paula can use
   - poo can use
-  Name: Sprig of parsley
+  Name: Sea cabbage
+#Sprig of parsley (Sea cabage souinds wacky and is fitting for what this is used on. Also its an alternate name for anori which is what this actually is.)
   Type: 40
 123:
   Action: 249
@@ -1947,7 +1978,8 @@
   - ness can use
   - paula can use
   - poo can use
-  Name: Jar of delisauce
+  Name: Everything spice
+#Jar of delisauce
   Type: 40
 127:
   Action: 149
@@ -3321,7 +3353,8 @@
   Help Text Pointer: item_descriptions.l_0xc55eab
   Misc Flags:
   - ness can use
-  Name: T-rex's bat
+  Name: Godzilla bat
+#T-rex's Bat
   Type: 16
 213:
   Action: 239
@@ -3360,7 +3393,8 @@
   Help Text Pointer: item_descriptions.l_0xc55f06
   Misc Flags:
   - jeff can use
-  Name: Double beam
+  Name: Double blaster
+#Double beam
   Type: 17
 216:
   Action: 240
@@ -3463,7 +3497,8 @@
   - ness can use
   - paula can use
   - poo can use
-  Name: Charm coin
+  Name: Warding coin
+#Charm coin (The Lucky coin and Charm coin both have identical functions despite having different names. This is actually a translation oversight)
   Type: 28
 223:
   Action: 249
@@ -3701,7 +3736,8 @@
   - ness can use
   - paula can use
   - poo can use
-  Name: Bowl of rice gruel
+  Name: Buttery congee
+#Bowl of rice gruel (this sounds really depressing dispite how goot the item is. congee is a more global term now and thus can be used)
   Type: 32
 237:
   Action: 249
@@ -3752,7 +3788,8 @@
   - ness can use
   - paula can use
   - poo can use
-  Name: Plain roll
+  Name: Badly made bread
+#Plain roll
   Type: 32
 240:
   Action: 249
@@ -3769,7 +3806,8 @@
   - ness can use
   - paula can use
   - poo can use
-  Name: Kabob
+  Name: Grilled kabob
+#Kabob
   Type: 32
 241:
   Action: 249
