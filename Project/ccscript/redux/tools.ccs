@@ -1,0 +1,563 @@
+//------------------------------------
+// 	Tools menu
+//------------------------------------
+// A hijack of the original "Talk to" menu option to instead work as a Tools menu
+// This frees up space in the main inventory for Jeff
+
+//------------------------------------
+// 	File imports
+//------------------------------------
+import "../definitions/flags.ccs"
+import "../definitions/items.ccs"
+import "../essential/asm65816.ccs"
+import "../essential/cc_asmcall.ccs"
+import "../essential/ccexpand.ccs"
+import "../essential/commands.ccs"
+import "../essential/jsl_rts.ccs"
+import "../essential/stdext.ccs"
+import "../redux/menu_macros.ccs"
+import "../redux/window_titles.ccs"
+
+//------------------------------------
+// 	Definitions
+//------------------------------------
+
+// Define routines
+define UNFREEZE_OBJECTS		= 0xC09451
+define PLAY_SOUND		= 0xC0ABE0
+
+define CLOSE_HPPP_WINDOWS	= 0xC10000
+define SET_WINDOW_FOCUS		= 0xC1007E
+define CLOSE_FOCUS_WINDOW	= 0xC10084
+define CLOSEALL_WINDOWS		= 0xC1008E
+define CREATE_WINDOW		= 0xC104EE
+define HIDE_HPPP_WINDOWS	= 0xC10A1D
+define PRINT_STRING		= 0xC10EFC
+define WINDOW_TICK		= 0xC12DD5
+define MAIN_PAUSE_MENU		= 0xC134CD
+define ENTITY_FADE_ENTITY	= 0xC1B4A8
+define CLOSE_INVENTORY_WHICH_WINDOWS	= 0xC135DE
+define CLOSE_INVENTORY_MENU	= 0xC13648
+define DISPLAY_TEXT		= 0xC186B1
+define OPEN_WHICH_WINDOW	= 0xC193E7
+define CLOSE_WHICH_WINDOW	= 0xC19437
+define CREATE_WINDOW_REDIRECT	= 0xC1DD47
+define SELECTION_MENU_ITEM_SETUP	= 0xC1DDDA
+define PRINT_MENU_ITEMS_REDIRECT	= 0xC1DE25
+define SELECTION_MENU_REDIRECT	= 0xC1DE2B
+
+define SET_WINDOW_TITLE		= 0xC2032B
+define GET_EVENT_FLAG		= 0xC21628
+
+define CLEAR_INSTANT_PRINTING	= 0xC3E4CA
+define SET_INSTANT_PRINTING	= 0xC3E4D4
+define CLOSE_WINDOW		= 0xC3E521
+
+// Define window constants
+define MAINMENU_WINDOW	= 0
+define DIALOGUE_WINDOW	= 1
+define INVENTORY_WINDOW	= 2
+define CASH_WINDOW	= 10
+define WHICH_WINDOW	= 40
+define USE_HELP_WINDOW	= 61
+
+//------------------------------------
+// 	'Status' code hijack
+//------------------------------------
+// Show Tools option only when Jeff is in the party
+ROM[0xC133CB] = {
+	JML	(Key_N_Tools_Option_Appear)
+	NOP
+}
+
+// Hide the Tools menu options if Jeff isn't on the party
+// Also, Hide the Key items option if Jeff hasn't gotten any Key item yet
+Key_N_Tools_Option_Appear: {
+// Original code:
+	LDA_d	(0x02)
+	CMP_i	(0x0003)	// PSI option check
+	BNE	(0x14)		// _BNE1
+
+	JSL_RTS_C1	(0xC1C373)	// B length
+	CMP_i	(0x0000)
+	BNE	(0x04)		// _BNE1
+	JML	(0xC1348F)
+
+_BNE1:
+// Check for Tools menu option
+	LDA_d	(0x02)
+	CMP_i	(0x0006)	// Check for 'Status' / Tools menu option
+	BNE	(0x10)		// _BNE2
+
+// Flag check for Jeff in party for Tools option to appear
+	LDA_i	(FLG_JEFF_KI)
+	JSL	(GET_EVENT_FLAG)
+	CMP_i	(0x0000)
+	BNE	(0x04)		// _BNE2
+	JML	(0xC1348F)
+
+_BNE2:
+// Check for Key items menu option
+	LDA_d	(0x02)
+	CMP_i	(0x0005)	// Check for 'Check' / Key items menu option
+	BNE	(0x1F)	// _Exit
+
+// Flag check for Jeff in party and its 1st key for Key items option to appear for him
+	LDA_i	(FLG_JEFF_SOLO)
+	JSL	(GET_EVENT_FLAG)
+	CMP_i	(0x0000)
+	BNE	(0x03)
+	JMP	(_Exit)
+
+	LDA_i	(FLG_ITEM_KEY_LOCKER)
+	JSL	(GET_EVENT_FLAG)
+	CMP_i	(0x0000)
+	BNE	(0x04)	// _Exit
+	JML	(0xC1348F)
+
+_Exit:
+	JML	(0xC133DD)	// Return to original code
+}
+
+// Hijack the 'Talk to' routine for Overworld use
+ROM[0xC1350E] = {
+	MText	(Tools_Prep_Overworld)	// MText takes 0x0E bytes
+	// 0xC135
+	JSL	(CC_Close_Custom_Windows_OW)	// Close our custom windows
+	JMP	(MAIN_PAUSE_MENU)	// Return to the Main menu
+
+_exit_on_item_use:	// 0xC135
+	JMP	(0xC13C16)
+	// Limit for this section is up to 0xC13541
+}
+
+CC_Close_Custom_Windows_OW: {
+	// Close all windows properly through ASM
+	LDA_i	(DIALOGUE_WINDOW)	// Load standard dialogue window
+	JSL	(CLOSE_WINDOW)		// Close window routine
+
+	LDA_i	(WHICH_WINDOW)		// Load "Which?" text window
+	JSL	(CLOSE_WINDOW)		// Close window routine
+
+	LDA_i	(INVENTORY_WINDOW)	// Load inventory window
+	JSL	(CLOSE_WINDOW)		// Close window routine
+
+	LDA_i	(SND_SHOOT)		// 0x1B, 27, #SFX::MENU_OPEN_CLOSE
+	JSL	(PLAY_SOUND)
+
+	RTL
+}
+
+Tools_Prep_Overworld: {
+	call(open_which_window)
+	open_hp
+	show_wallet
+	goto(Tools_Overworld)
+}
+
+
+//------------------------------------
+// 	Item counters
+//------------------------------------
+SetCount1: { counter(1) ctoarg eob }
+SetCount2: { counter(2) ctoarg eob }
+SetCount3: { counter(3) ctoarg eob }
+SetCount4: { counter(4) ctoarg eob }
+SetCount5: { counter(5) ctoarg eob }
+SetCount6: { counter(6) ctoarg eob }
+SetCount7: { counter(7) ctoarg eob }
+SetCount8: { counter(8) ctoarg eob }
+SetCount9: { counter(9) ctoarg eob }
+SetCount10: { counter(10) ctoarg eob }
+SetCount11: { counter(11) ctoarg eob }
+SetCount12: { counter(12) ctoarg eob }
+
+//------------------------------------
+//   Main Tools Overworld ccscript code
+//------------------------------------
+Tools_Overworld:	
+	unset(FLG_TEMP_USEITEM)
+
+	store_registers_shared
+	back_up_text_rendering_state
+	window_open(INVENTORY_WINDOW)
+	title(0, Tools_Title)
+	pause(1)
+
+	load_registers_shared
+	counter_zero
+	ctoarg
+
+	// Item flag checks
+	load_str_callonhover("Spy kit", SetCount1)
+	// load_str_callonhover("Protractor", SetCount2)
+	// load_str_callonhover("Ruler", SetCount3)
+
+	if flag FLG_ITEM_SLIME_GENERATOR {
+		load_str_callonhover("Slime generator", SetCount2) }
+	if flag FLG_ITEM_SHIELD_KILLER {
+		load_str_callonhover("Shield killer", SetCount3) }
+	if flag FLG_ITEM_COUNTER_PSI_UNIT {
+		load_str_callonhover("Counter-PSI unit", SetCount4) }
+	if flag FLG_ITEM_NEUTRALIZER {
+		load_str_callonhover("Neutralizer", SetCount5) }
+	if flag FLG_ITEM_DEFENSE_SHOWER {
+		load_str_callonhover("Defense shower", SetCount6) }
+	//if flag FLG_ITEM_XTERMINATOR_SPRAY {
+		//load_str_callonhover("Xterminator spray", SetCount7) }
+	if flag FLG_ITEM_HP_SUCKER {
+		load_str_callonhover("HP-sucker", SetCount7) }
+	if flag FLG_ITEM_HUNGRY_HP_SUCKER {
+		load_str_callonhover("Hungry HP-sucker", SetCount8) }
+	if flag FLG_ITEM_BAZOOKA {
+		load_str_callonhover("Bazooka", SetCount9) }
+	if flag FLG_ITEM_HEAVY_BAZOOKA {
+		load_str_callonhover("Heavy bazooka", SetCount10) }
+	if flag FLG_ITEM_TOFU and not flag FLG_FOUR_MAID_THANKS {
+		load_str_callonhover("Tofu machine", SetCount11) }
+
+_Help_Backout:
+	print_strings_vertical(2)
+	if not do_menu_nounload {
+		// Exit
+		// Closing the windows is handled through ASM after returning from the Tools menu
+		eob
+	}
+
+	ctoarg
+	swap
+
+	switch_goto(11)	// Max 16
+		switch_entry(spy)
+		//switch_entry(ruler)
+		//switch_entry(protractor)
+		switch_entry(slimegenerator)
+		switch_entry(shieldkiller)
+		switch_entry(counterpsiunit)
+		switch_entry(neutralizer)
+		switch_entry(defenseshower)
+		switch_entry(hpsucker)
+		switch_entry(hungryhpsucker)
+		switch_entry(bazooka)
+		switch_entry(heavybazooka)
+		switch_entry(tofumachine)
+_Exit_Tools_Menu:
+	eob
+
+//------------------------------------
+// 	  Item scripts
+//------------------------------------
+	spy:		help_submenu(Spy_Description) eob
+	//ruler:	help_submenu(item_descriptions.l_0xc54ceb) eob
+	//protractor:	help_submenu(item_descriptions.l_0xc54ddc) eob
+	slimegenerator:	help_submenu(item_descriptions.l_0xc54c32) eob
+	shieldkiller:	help_submenu(item_descriptions.l_0xc54a6c) eob
+	counterpsiunit:	help_submenu(item_descriptions.l_0xc54a3a) eob
+	neutralizer:	help_submenu(item_descriptions.l_0xc559d9) eob
+	defenseshower:	help_submenu(item_descriptions.l_0xc5519f) eob
+	hpsucker: 	help_submenu(item_descriptions.l_0xc54b67) eob
+	hungryhpsucker:	help_submenu(item_descriptions.l_0xc54bb0) eob
+	bazooka:	help_submenu(item_descriptions.l_0xc54aa1) eob
+	heavybazooka:	help_submenu(item_descriptions.l_0xc54af5) eob
+	tofumachine:	help_submenu(item_descriptions.l_0xc54c6d) eob
+
+// Opens up the small window with the "Which?" text
+open_which_window: {
+	cc_asmcall(SET_INSTANT_PRINTING, RET_NONE)
+	window_open(WHICH_WINDOW)
+	"Which?"
+	cc_asmcall(CLEAR_INSTANT_PRINTING, RET_NONE)
+	eob
+}
+
+Spy_Description: {
+	newline
+	" <Spy kit>" next
+	// Description taken from the official Nintendo Player's Guide
+	"@A very special tool" linebreak	// A very special ability
+	"  that allows {name(3)} to size up the enemy" next
+	//"@and report all weaknesses to you." end
+	"@and report back all its weaknesses." end
+}
+
+//	Custom commands		//
+
+// Help submenu command
+command help_submenu( help_text ) {
+	window_switch(INVENTORY_WINDOW)
+	window_clear
+	window_open(DIALOGUE_WINDOW)
+	call(help_text)
+	window_close(DIALOGUE_WINDOW)
+	window_close(USE_HELP_WINDOW)
+	call(open_which_window)
+	window_switch(INVENTORY_WINDOW)
+	goto(_Help_Backout)
+}
+
+// Set the flag for the corresponding Tools Item
+command give_menu_tools_item(itemID) {
+	counter(itemID)
+
+	sound(SND_BOXTAKE)	// 116
+	pause(40) newline
+
+	get_char_at_pos(1)
+	result_is(3)
+	goto_if_true(_jeff_leader)
+
+	get_char_at_pos(1) swap
+	"@({name(0)} added the" linebreak
+	"  {itemname(itemID)}" linebreak
+	"  to Jeff's Tools.)" end
+
+_jeff_leader:
+	get_char_at_pos(1) swap
+	"@({name(0)} added the" linebreak
+	"  {itemname(itemID)}" linebreak
+	"  to his Tools.)" end
+}
+
+//------------------------------------
+//   Main Tools Battle code
+//------------------------------------
+// Hijack 'Spy' battle action routine for our custom Tools menu
+ROM[0xC239C9] = JML	(ToolsMenu)
+
+ToolsMenu: {
+	LDY_i	(0x000E)	// Checks permanent status
+	LDA_diy	(0x22)
+	AND_i	(0x00FF)
+	CMP_i	(0x0003)	// Permanent status 3, paralysis
+	BEQ_a	(_Paralyzed)
+	LDY_i	(0x0010)	// Checks in-battle status
+	LDA_diy	(0x22)
+	AND_i	(0x00FF)
+	CMP_i	(0x0003)	// In-battle status 3, immobilization
+	BNE_a	(_Can_Move)
+
+_Paralyzed:
+	do_menu_macros(2, CANCELLABLE, {
+		set_window_title(2, "Tools")
+		menu_option("Spy kit", 0, 0, {
+			set_action(6)
+			LDA_i(2)
+			JSL(0xC3E521)	// Close_Window
+			ret_tools_target()
+		})
+	})
+	JMP(_done)
+
+_Can_Move:
+	do_menu_grid(2, CANCELLABLE, 2, {
+		set_window_title(2, "Tools")
+		menu_option_no_position("Spy kit", {
+			set_action(6)
+			LDA_i(2)
+			JSL(0xC3E521)	// Close_Window
+			ret_tools_target()
+		})
+		if_flag(FLG_ITEM_SLIME_GENERATOR, {
+			menu_option_no_position("Slime generator", {
+				set_action(169)
+				set_item_args_noinv(SLIME_GENERATOR)
+				LDA_i(2)
+				JSL(0xC3E521)	// Close_Window
+				ret_tools_target()
+			})
+		})
+		if_flag(FLG_ITEM_SHIELD_KILLER, {
+			menu_option_no_position("Shield killer", {
+				set_action(160)
+				set_item_args_noinv(SHIELD_KILLER)
+				LDA_i(2)
+				JSL(0xC3E521)	// Close_Window
+				ret_tools_target()
+			})
+		})
+		if_flag(FLG_ITEM_COUNTER_PSI_UNIT, {
+			menu_option_no_position("Counter PSI unit", {
+				set_action(159)
+				set_item_args_noinv(COUNTER_PSI_UNIT)
+				LDA_i(2)
+				JSL(0xC3E521)	// Close_Window
+				ret_tools_target()
+			})
+		})
+		if_flag(FLG_ITEM_NEUTRALIZER, {
+			menu_option_no_position("Neutralizer", {
+				set_action(247)
+				set_item_args_noinv(195)
+				LDA_i(2)
+				JSL(0xC3E521)	// Close_Window
+				ret_tools_multi_target(MULTI_ENEMY_TARGET)
+			})
+		})
+		if_flag(FLG_ITEM_DEFENSE_SHOWER, {
+			menu_option_no_position("Defense shower", {
+				set_action(184)
+				set_item_args_noinv(157)
+				LDA_i(2)
+				JSL(0xC3E521)	// Close_Window
+				ret_tools_multi_target(PARTY_TARGET)
+			})
+		})
+		if_flag(FLG_ITEM_HP_SUCKER, {
+			menu_option_no_position("HP sucker", {
+				set_action(161)
+				set_item_args_noinv(135)
+				LDA_i(2)
+				JSL(0xC3E521)	// Close_Window
+				ret_tools_target()
+			})
+		})
+		if_flag(FLG_ITEM_HUNGRY_HP_SUCKER, {
+			menu_option_no_position("Hungry HP sucker", {
+				set_action(176)
+				set_item_args_noinv(136)
+				LDA_i(2)
+				JSL(0xC3E521)	// Close_Window
+				ret_tools_multi_target(MULTI_ENEMY_TARGET)
+			})
+		})
+		if_flag(FLG_ITEM_BAZOOKA, {
+			menu_option_no_position("Bazooka", {
+				set_action(310)
+				set_item_args_noinv(133)
+				LDA_i(2)
+				JSL(0xC3E521)	// Close_Window
+				ret_tools_target()
+			})
+		})
+		if_flag(FLG_ITEM_HEAVY_BAZOOKA, {
+			menu_option_no_position("Heavy bazooka", {
+				set_action(311)
+				set_item_args_noinv(134)
+				LDA_i(2)
+				JSL(0xC3E521)	// Close_Window
+				ret_tools_target()
+			})
+		})
+		if_flag(FLG_ITEM_TOFU, {
+			if_not_flag(FLG_FOUR_MAID_THANKS, {
+				menu_option_no_position("Tofu machine", {
+					set_action(170)
+					set_item_args_noinv(TOFU_MACHINE)
+					LDA_i(2)
+					JSL(0xC3E521)	// Close_Window
+					ret_tools_multi_target(MULTI_ENEMY_TARGET)
+				})
+			})
+		})
+	})
+
+_done:
+	CMP_i(0)
+	BEQ_a(_cancelled)
+
+	LDA_i(2)
+	JSL(0xC3E521)
+
+	JML(0xC23B4D)
+
+_cancelled:
+	LDA_i(2)
+	JSL(0xC3E521)
+
+	JML(0xC23829)
+}
+
+// Another global, inexplicably not part of the selection struct
+define BATTLE_ITEM_USED = 0xA97C // 1 byte
+
+// Stack variables
+define PARTY_ID = 0x00 // Current kid's ID (1 Ness, 2 Paula, etc)
+
+// These get returned via a global struct at $A97D
+define BATTLE_SELECTION = 0xA97D // Start of struct, used as a pointer value
+define BATTLE_SELECTION_USER = 0xA97D // 1 byte, used by psi menu and goods menu
+define BATTLE_SELECTION_PARAM1 = 0xA97E // 1 byte; item slot (not ID) or PSI ID for action argument
+define BATTLE_SELECTION_ACTION = 0xA97F // 2 bytes
+define BATTLE_SELECTION_TARGETTING = 0xA981 // 1 byte, but determineTargetting joins it with the target
+define BATTLE_SELECTION_TARGET = 0xA982 // 1 byte
+
+// Custom target command based on Spy's battle action routine
+command ret_tools_target() {
+	LDA_a(BATTLE_SELECTION_ACTION)
+	STA_d(0x02)
+	STA_d(0x1E)
+	LDA_d(0x02)
+	STA_a(BATTLE_SELECTION_ACTION)	// BATTLE_SELECTION_ACTION
+	SEP(0x20)			// accum8
+	LDA_8(0x11)
+	STA_a(BATTLE_SELECTION_TARGETTING)	// BATTLE_SELECTION_TARGETTING
+	LDY_d(0x02)
+	LDX_i(0x0001)
+	REP(0x20)
+	LDA_i(0)
+	JSL(0xC1DE37)			// REDIRECT_C1242E — same as original
+	SEP(0x20)
+	STA_a(BATTLE_SELECTION_TARGET)	// BATTLE_SELECTION_TARGET
+	REP(0x20)
+	AND_i(0x00FF)
+	// 0 = cancelled (retry), nonzero = confirmed (exit do_menu_macros)
+	RTS
+}
+
+define PARTY_TARGET		= 0x04
+define MULTI_ENEMY_TARGET	= 0x12
+
+command ret_tools_multi_target(target) {	// Neutralizer / All characters in battle
+	LDA_a(BATTLE_SELECTION_ACTION)
+	STA_d(0x02)
+	STA_d(0x1E)
+	LDA_d(0x02)
+	STA_a(BATTLE_SELECTION_ACTION)	// BATTLE_SELECTION_ACTION
+	SEP(0x20)			// accum8
+	LDA_8(target)
+	STA_a(BATTLE_SELECTION_TARGETTING)	// BATTLE_SELECTION_TARGETTING
+	LDY_d(0x02)
+	LDX_i(0x0001)
+	SEP(0x20)
+	STA_a(BATTLE_SELECTION_TARGET)	// BATTLE_SELECTION_TARGET
+	REP(0x20)
+	AND_i(0x00FF)
+	// 0 = cancelled (retry), nonzero = confirmed (exit do_menu_macros)
+	RTS
+}
+
+/* COMMANDS TAKEN FROM BATTLE_MENU.CCS */
+// https://gist.github.com/tolmar/b19f795a6a153740ed0860bb40f8b395
+
+// Sets the current action to a regular one without an argument
+command set_action(action) {
+	LDA_i(action)
+	STA_a(BATTLE_SELECTION_ACTION)
+}
+
+// Does target selection for the current action, and returns or cancels as appropriate
+command ret_target() {
+	LDA_a(BATTLE_SELECTION_ACTION)
+	LDX_d(PARTY_ID)
+	JSL_RTS_C1(0xC1ADB4) // determineTargetting(short actionId, short userId)
+	// returns both targetting bits and target
+	XBA // but they're swapped
+	STA_a(BATTLE_SELECTION_TARGETTING)
+	// determineTargetting returns 0 in the target (low byte) if cancelled.
+	// ret_retry() is 0, so mask that to match
+	AND_i(0xFF00)
+	RTS
+}
+
+// Sets action arguments for an item use.
+// You'll also need to call set_action()
+// This forces the item ID to be used as the argument without it being in the inventory
+command set_item_args_noinv(item_id) {
+	SEP(0x20) // accum8
+	LDA_8(item_id)
+	STA_a(BATTLE_ITEM_USED)
+	STA_a(BATTLE_SELECTION_PARAM1)
+	REP(0x20) // accum8
+}
+
+//------------------------------------

@@ -1,0 +1,515 @@
+import "../essential/commands.ccs"
+import "../essential/stdext.ccs"
+import "../redux/window_titles.ccs"
+
+// PSI Animations calls
+l_0xef8543:
+	newline
+	event(8)	// 0x08
+	goto_if_false(l_0xef8568)
+	sound(SND_PSI2)	// 55
+	"@{user} tried" linebreak
+	get_action_arg swap
+	"  {psiname(0)}!" promptw
+	goto(l_0xef857e)
+
+l_0xef8568:
+	sound(SND_PSI1)	// 29
+	"@{user} tried" linebreak
+	get_action_arg swap
+	"  {psiname(0)}!" promptw
+	goto(l_0xef857e)
+
+l_0xef857e:
+	swap
+	switch_call(50)	// 0x32
+		switch_entry(l_0xef864c)
+		switch_entry(l_0xef866e)
+		switch_entry(l_0xef8698)
+		switch_entry(l_0xef86e2)
+		switch_entry(l_0xef874a)
+		switch_entry(l_0xef875f)
+		switch_entry(l_0xef8777)
+		switch_entry(l_0xef878f)
+		switch_entry(l_0xef87ac)
+		switch_entry(l_0xef87c3)
+		switch_entry(l_0xef87da)
+		switch_entry(l_0xef87f4)
+		switch_entry(l_0xef8813)
+		switch_entry(l_0xef8813)
+		switch_entry(l_0xef8813)
+		switch_entry(l_0xef8813)
+		switch_entry(l_0xef883d)
+		switch_entry(l_0xef8847)
+		switch_entry(l_0xef8851)
+		switch_entry(l_0xef8868)
+		switch_entry(l_0xef8882)
+		switch_entry(l_0xef88b8)
+		switch_entry(l_0xef88e9)
+		switch_entry(l_0xef88e9)
+		switch_entry(l_0xef88e9)
+		switch_entry(l_0xef88e9)
+		switch_entry(l_0xef88e9)
+		switch_entry(l_0xef88e9)
+		switch_entry(l_0xef88e9)
+		switch_entry(l_0xef88e9)
+		switch_entry(l_0xef88ec)
+		switch_entry(l_0xef88f6)
+		switch_entry(l_0xef8900)
+		switch_entry(l_0xef890a)
+		switch_entry(l_0xef8914)
+		switch_entry(l_0xef891e)
+		switch_entry(l_0xef8928)
+		switch_entry(l_0xef8932)
+		switch_entry(l_0xef88e9)
+		switch_entry(l_0xef88e9)
+		switch_entry(l_0xef893c)
+		switch_entry(l_0xef894c)
+		switch_entry(l_0xef895c)
+		switch_entry(l_0xef896c)
+		switch_entry(l_0xef897c)
+		switch_entry(l_0xef898c)
+		switch_entry(l_0xef899c)
+		switch_entry(l_0xef89ac)
+		switch_entry(l_0xef89bc)
+		switch_entry(l_0xef89ce)
+	eob
+
+l_0xef864c:
+	battle_animation(0,19)	// 0x00, 0x13
+	pause(10)
+	sound(SND_ROCKIN1)	// 48
+	pause(32)
+	sound(SND_THUMP2)	// 74
+	pause(2)
+	sound(SND_ROCKIN1)	// 48
+	battle_animation(42,0)	// 0x2A, 0x00
+	pause(32)
+	sound(SND_THUMP2)	// 74
+	pause(14)
+	sound(SND_FIRE4)	// 91
+	eob
+
+l_0xef866e:
+	sound(SND_ROCKIN1)	// 48
+	battle_animation(0,20)	// 0x00, 0x14
+	pause(32)
+	sound(SND_THUMP2)	// 74
+	pause(2)
+	sound(SND_ROCKIN1)	// 48
+	pause(29)
+	sound(SND_THUMP2)	// 74
+	pause(2)
+	sound(SND_ROCKIN2)	// 49
+	battle_animation(42,0)	// 0x2A, 0x00
+	pause(29)
+	sound(SND_ROCKIN2)	// 49
+	pause(25)
+	sound(SND_FIRE4)	// 91
+	eob
+
+l_0xef8698:
+	battle_animation(0,21)	// 0x00, 0x15
+	pause(5)
+	sound(SND_ROCKIN2)	// 49
+	pause(32)
+	sound(SND_ROCKIN3)	// 50
+	pause(26)
+	sound(SND_HISS)	// 71
+	pause(7)
+	sound(SND_HISS)	// 71
+	pause(7)
+	sound(SND_HISS)	// 71
+	pause(7)
+	sound(SND_HISS)	// 71
+	pause(7)
+	sound(SND_HISS)	// 71
+	pause(7)
+	battle_animation(42,0)	// 0x2A, 0x00
+	sound(SND_HISS)	// 71
+	pause(7)
+	sound(SND_HISS)	// 71
+	pause(7)
+	sound(SND_HISS)	// 71
+	pause(3)
+	sound(SND_FIRE4)	// 91
+	pause(3)
+	sound(SND_FIRE4)	// 91
+	pause(5)
+	sound(SND_FIRE4)	// 91
+	eob
+
+l_0xef86e2:
+	battle_animation(0,22)	// 0x00, 0x16
+	pause(30)
+	sound(SND_ROCKIN2)	// 49
+	pause(34)
+	sound(SND_ROCKIN2)	// 49
+	pause(34)
+	sound(SND_ROCKIN2)	// 49
+	pause(34)
+	sound(SND_FIRE4)	// 91
+	pause(7)
+	sound(SND_FIRE4)	// 91
+	pause(7)
+	sound(SND_FIRE4)	// 91
+	pause(7)
+	sound(SND_FIRE4)	// 91
+	pause(7)
+	sound(SND_FIRE4)	// 91
+	pause(11)
+	sound(SND_FIRE4)	// 91
+	pause(11)
+	sound(SND_FIRE4)	// 91
+	pause(11)
+	battle_animation(42,0)	// 0x2A, 0x00
+	sound(SND_FIRE4)	// 91
+	pause(3)
+	sound(SND_FIRE4)	// 91
+	pause(3)
+	sound(SND_FIRE4)	// 91
+	pause(3)
+	sound(SND_FIRE4)	// 91
+	pause(3)
+	sound(SND_FIRE4)	// 91
+	pause(3)
+	sound(SND_FIRE4)	// 91
+	pause(3)
+	sound(SND_FIRE4)	// 91
+	pause(3)
+	sound(SND_FIRE4)	// 91
+	pause(3)
+	sound(SND_FIRE4)	// 91
+	eob
+
+l_0xef874a:
+	sound(SND_FIRE1)	// 51
+	battle_animation(0,7)	// 0x00, 0x07
+	pause(28)
+	sound(SND_FIRE3)	// 53
+	pause(6)
+	battle_animation(36,0)	// 0x24, 0x00
+	pause(30)
+	eob
+
+l_0xef875f:
+	sound(SND_FIRE1)	// 51
+	battle_animation(0,8)	// 0x00, 0x08
+	pause(28)
+	sound(SND_FIRE3)	// 53
+	pause(24)
+	sound(SND_FIRE2)	// 52
+	battle_animation(36,0)	// 0x24, 0x00
+	pause(30)
+	eob
+
+l_0xef8777:
+	sound(SND_FIRE1)	// 51
+	battle_animation(0,9)	// 0x00, 0x09
+	pause(28)
+	sound(SND_FIRE3)	// 53
+	pause(24)
+	sound(SND_FIRE2)	// 52
+	battle_animation(36,0)	// 0x24, 0x00
+	pause(35)
+	eob
+
+l_0xef878f:
+	sound(SND_FIRE1)	// 51
+	battle_animation(0,10)	// 0x00, 0x0A
+	pause(28)
+	sound(SND_FIRE3)	// 53
+	pause(29)
+	sound(SND_FIRE3)	// 53
+	pause(24)
+	sound(SND_FIRE3)	// 53
+	battle_animation(36,0)	// 0x24, 0x00
+	pause(55)
+	eob
+
+l_0xef87ac:
+	sound(SND_FREEZE1)	// 56
+	battle_animation(0,15)	// 0x00, 0x0F
+	pause(30)
+	sound(SND_FREEZE2)	// 57
+	pause(20)
+	battle_animation(41,0)	// 0x29, 0x00
+	pause(15)
+	pause(27)
+	eob
+
+l_0xef87c3:
+	sound(SND_FREEZE1)	// 56
+	battle_animation(0,16)	// 0x00, 0x10
+	pause(34)
+	sound(SND_FREEZE2)	// 57
+	pause(20)
+	battle_animation(41,0)	// 0x29, 0x00
+	pause(15)
+	pause(27)
+	eob
+
+l_0xef87da:
+	sound(SND_FREEZE1)	// 56
+	battle_animation(0,17)	// 0x00, 0x11
+	pause(38)
+	sound(SND_FREEZE2)	// 57
+	pause(11)
+	battle_animation(41,0)	// 0x29, 0x00
+	pause(27)
+	sound(SND_DEFENSEDOWN1)	// 58
+	pause(42)
+	eob
+
+l_0xef87f4:
+	sound(SND_FREEZE1)	// 56
+	battle_animation(0,18)	// 0x00, 0x12
+	pause(54)
+	sound(SND_FREEZE2)	// 57
+	pause(5)
+	battle_animation(41,0)	// 0x29, 0x00
+	pause(31)
+	sound(SND_DEFENSEDOWN1)	// 58
+	pause(27)
+	sound(SND_DEFENSEDOWN1)	// 58
+	pause(20)
+	eob
+
+l_0xef8813:
+	eob
+
+l_0xef8814:
+	sound(SND_THUNDERHIT1)	// 61
+	battle_animation(46,33)	// 0x2E, 0x21
+	pause(22)
+	sound(SND_THUNDERDAMAGE)	// 63
+	pause(30)
+	eob
+
+l_0xef8823:
+	sound(SND_THUNDERHIT2)	// 62
+	battle_animation(46,34)	// 0x2E, 0x22
+	pause(22)
+	sound(SND_THUNDERDAMAGE)	// 63
+	pause(23)
+	sound(SND_THUNDERDAMAGE)	// 63
+	pause(30)
+	eob
+
+l_0xef8837:
+	sound(SND_THUNDERMISS)	// 60
+	pause(60)
+	eob
+
+l_0xef883d:
+	sound(SND_FLASH1)	// 65
+	battle_animation(40,11)	// 0x28, 0x0B
+	pause(30)
+	eob
+
+l_0xef8847:
+	sound(SND_FLASH1)	// 65
+	battle_animation(40,12)	// 0x28, 0x0C
+	pause(30)
+	eob
+
+l_0xef8851:
+	sound(SND_FLASH3)	// 67
+	pause(10)
+	battle_animation(0,13)	// 0x00, 0x0D
+	pause(20)
+	battle_animation(40,0)	// 0x28, 0x00
+	pause(19)
+	sound(SND_FLASH2)	// 66
+	pause(26)
+	eob
+
+l_0xef8868:
+	sound(SND_FLASH3)	// 67
+	battle_animation(0,14)	// 0x00, 0x0E
+	pause(17)
+	battle_animation(40,0)	// 0x28, 0x00
+	pause(50)
+	sound(SND_FLASH2)	// 66
+	pause(5)
+	sound(SND_FLASH2)	// 66
+	pause(14)
+	eob
+
+l_0xef8882:
+	battle_animation(0,31)	// 0x00, 0x1F
+	pause(10)
+	sound(SND_STARSTORM)	// 64
+	pause(50)
+	battle_animation(45,0)	// 0x2D, 0x00
+	sound(SND_FIRE4)	// 91
+	pause(7)
+	sound(SND_FIRE4)	// 91
+	pause(15)
+	sound(SND_FIRE4)	// 91
+	pause(7)
+	sound(SND_FIRE4)	// 91
+	pause(7)
+	sound(SND_FIRE4)	// 91
+	pause(7)
+	sound(SND_FIRE4)	// 91
+	pause(7)
+	sound(SND_FIRE4)	// 91
+	pause(7)
+	sound(SND_FIRE4)	// 91
+	eob
+
+l_0xef88b8:
+	battle_animation(0,32)	// 0x00, 0x20
+	pause(20)
+	sound(SND_STARSTORM)	// 64
+	pause(40)
+	battle_animation(45,0)	// 0x2D, 0x00
+	pause(24)
+	sound(SND_STARSTORM)	// 64
+	sound(SND_FIRE4)	// 91
+	pause(19)
+	sound(SND_FIRE4)	// 91
+	pause(15)
+	sound(SND_FIRE4)	// 91
+	pause(15)
+	sound(SND_FIRE4)	// 91
+	pause(11)
+	sound(SND_FIRE4)	// 91
+	pause(4)
+	sound(SND_FIRE4)	// 91
+	eob
+
+l_0xef88e9:
+	pause(30)
+	eob
+
+l_0xef88ec:
+	sound(SND_SHIELD1)	// 38
+	battle_animation(50,0)	// 0x32, 0x00
+	pause(1)
+	eob
+
+l_0xef88f6:
+	sound(SND_SHIELD1)	// 38
+	battle_animation(50,0)	// 0x32, 0x00
+	pause(1)
+	eob
+
+l_0xef8900:
+	sound(SND_SHIELD1)	// 38
+	battle_animation(51,0)	// 0x33, 0x00
+	pause(1)
+	eob
+
+l_0xef890a:
+	sound(SND_SHIELD1)	// 38
+	battle_animation(51,0)	// 0x33, 0x00
+	pause(1)
+	eob
+
+l_0xef8914:
+	sound(SND_SHIELD2)	// 39
+	battle_animation(52,0)	// 0x34, 0x00
+	pause(1)
+	eob
+
+l_0xef891e:
+	sound(SND_SHIELD2)	// 39
+	battle_animation(52,0)	// 0x34, 0x00
+	pause(1)
+	eob
+
+l_0xef8928:
+	sound(SND_SHIELD2)	// 39
+	battle_animation(53,0)	// 0x35, 0x00
+	pause(1)
+	eob
+
+l_0xef8932:
+	sound(SND_SHIELD2)	// 39
+	battle_animation(53,0)	// 0x35, 0x00
+	pause(1)
+	eob
+
+l_0xef893c:
+	sound(SND_PARALYSIS)	// 44
+	battle_animation(0,5)	// 0x00, 0x05
+	pause(40)
+	battle_animation(39,0)	// 0x27, 0x00
+	pause(100)
+	eob
+
+l_0xef894c:
+	sound(SND_PARALYSIS2)	// 79
+	battle_animation(0,6)	// 0x00, 0x06
+	pause(40)
+	battle_animation(39,0)	// 0x27, 0x00
+	pause(125)
+	eob
+
+l_0xef895c:
+	sound(SND_HYPNOSIS)	// 42
+	battle_animation(0,28)	// 0x00, 0x1C
+	pause(25)
+	battle_animation(47,0)	// 0x2F, 0x00
+	pause(30)
+	eob
+
+l_0xef896c:
+	sound(SND_HYPNOSIS)	// 42
+	battle_animation(0,29)	// 0x00, 0x1D
+	pause(55)
+	battle_animation(47,0)	// 0x2F, 0x00
+	pause(30)
+	eob
+
+l_0xef897c:
+	sound(SND_MAGNET)	// 43
+	battle_animation(0,25)	// 0x00, 0x19
+	pause(45)
+	battle_animation(44,0)	// 0x2C, 0x00
+	pause(57)
+	eob
+
+l_0xef898c:
+	sound(SND_MAGNET2)	// 76
+	battle_animation(0,26)	// 0x00, 0x1A
+	pause(45)
+	battle_animation(44,0)	// 0x2C, 0x00
+	pause(33)
+	eob
+
+l_0xef899c:
+	sound(SND_PARALYSIS)	// 44
+	battle_animation(0,23)	// 0x00, 0x17
+	pause(60)
+	battle_animation(43,0)	// 0x2B, 0x00
+	pause(70)
+	eob
+
+l_0xef89ac:
+	sound(SND_PARALYSIS2)	// 79
+	battle_animation(0,24)	// 0x00, 0x18
+	pause(60)
+	battle_animation(43,0)	// 0x2B, 0x00
+	pause(70)
+	eob
+
+l_0xef89bc:
+	pause(20)
+	sound(SND_BRAINSHOCK1)	// 45
+	battle_animation(0,2)	// 0x00, 0x02
+	pause(20)
+	battle_animation(47,0)	// 0x2F, 0x00
+	pause(76)
+	eob
+
+l_0xef89ce:
+	pause(20)
+	sound(SND_BRAINSHOCK3)	// 80
+	battle_animation(0,3)	// 0x00, 0x03
+	pause(40)
+	battle_animation(47,0)	// 0x2F, 0x00
+	pause(128)
+	eob

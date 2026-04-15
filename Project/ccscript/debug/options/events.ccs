@@ -1,10 +1,10 @@
 // Events debug menu option
 
+import "../../definitions/flags.ccs"
 import "../../definitions/items.ccs"
 import "../../essential/asm65816.ccs"
 import "../../essential/cc_asmcall.ccs"
 import "../../essential/commands.ccs"
-import "../../essential/flags.ccs"
 import "../../essential/stdext.ccs"
 import "../../redux/keyitems.ccs"
 import "../../debug/diamond.ccs"
@@ -15,85 +15,89 @@ ROM[0xC59895] = goto(Events)
 
 Events:
 	diam "Select your event." next
-	"   " number_input(2) newline
+	"   {number_input(2)}" newline
 	switch_goto(70)
-		switch_entry(l_0xc599d0)
-		switch_entry(l_0xc599f4)
-		switch_entry(l_0xc59a15)
-		switch_entry(l_0xc59a40)
-		switch_entry(l_0xc59a72)
-		switch_entry(l_0xc59aa4)
-		switch_entry(l_0xc59ace)
-		switch_entry(l_0xc59af5)
-		switch_entry(l_0xc59b25)
-		switch_entry(l_0xc59b45)
-		switch_entry(l_0xc59b78)
-		switch_entry(l_0xc59bb5)
-		switch_entry(l_0xc59bd7)
-		switch_entry(l_0xc59bfc)
-		switch_entry(l_0xc59c39)
-		switch_entry(l_0xc59c67)
-		switch_entry(l_0xc59c84)
-		switch_entry(l_0xc59cb5)
-		switch_entry(l_0xc59cd9)
-		switch_entry(l_0xc59d06)
-		switch_entry(l_0xc59d30)
-		switch_entry(l_0xc59d61)
-		switch_entry(l_0xc59d7f)
-		switch_entry(l_0xc59da0)
-		switch_entry(l_0xc59dbd)
-		switch_entry(l_0xc59de1)
-		switch_entry(l_0xc59e01)
-		switch_entry(l_0xc59e21)
-		switch_entry(l_0xc59e40)
-		switch_entry(l_0xc59e62)
-		switch_entry(l_0xc59e84)
-		switch_entry(l_0xc59eb2)
-		switch_entry(l_0xc59f08)
-		switch_entry(l_0xc59f44)
-		switch_entry(l_0xc59f60)
-		switch_entry(l_0xc59f80)
-		switch_entry(l_0xc59fa0)
-		switch_entry(l_0xc59fbd)
-		switch_entry(l_0xc59ff1)
-		switch_entry(l_0xc5a00c)
-		switch_entry(l_0xc5a036)
-		switch_entry(l_0xc5a05b)
-		switch_entry(l_0xc5a07e)
-		switch_entry(l_0xc5a0b3)
-		switch_entry(l_0xc5a0db)
-		switch_entry(l_0xc5a0fe)
-		switch_entry(l_0xc5a11a)
-		switch_entry(l_0xc5a154)
-		switch_entry(l_0xc5a17d)
-		switch_entry(l_0xc5a1ae)
-		switch_entry(l_0xc5a1cd)
-		switch_entry(l_0xc5a1ff)
-		switch_entry(l_0xc5a232)
-		switch_entry(l_0xc5a25e)
-		switch_entry(l_0xc5a29c)
-		switch_entry(l_0xc5a2c2)
-		switch_entry(l_0xc5a2ec)
-		switch_entry(l_0xc5a318)
-		switch_entry(l_0xc5a342)
-		switch_entry(l_0xc5a36c)
-		switch_entry(l_0xc5a396)
-		switch_entry(l_0xc5a3c0)
-		switch_entry(l_0xc5a3ea)
-		switch_entry(l_0xc5a414)
-		switch_entry(l_0xc5a43e)
-		switch_entry(l_0xc5a465)
-		switch_entry(l_0xc5a48b)
-		switch_entry(l_0xc5a4b4)
-		switch_entry(l_0xc5a4cd)
-	newline newline
-	"{diam}Events menu off." wait
+		switch_entry(l_0xc599d0)	// 1
+		switch_entry(l_0xc599f4)	// 2
+		switch_entry(l_0xc59a15)	// 3
+		switch_entry(l_0xc59a40)	// 4
+		switch_entry(l_0xc59a72)	// 5
+		switch_entry(l_0xc59aa4)	// 6
+		switch_entry(l_0xc59ace)	// 7
+		switch_entry(l_0xc59af5)	// 8
+		switch_entry(l_0xc59b25)	// 9
+		switch_entry(l_0xc59b45)	// 10
+		switch_entry(l_0xc59b78)	// 11
+		switch_entry(l_0xc59bb5)	// 12
+		switch_entry(l_0xc59bd7)	// 13
+		switch_entry(l_0xc59bfc)	// 14
+		switch_entry(l_0xc59c39)	// 15
+		switch_entry(l_0xc59c67)	// 16
+		switch_entry(l_0xc59c84)	// 17
+		switch_entry(l_0xc59cb5)	// 18
+		switch_entry(l_0xc59cd9)	// 19
+		switch_entry(l_0xc59d06)	// 20
+		switch_entry(l_0xc59d30)	// 21
+		switch_entry(l_0xc59d61)	// 22
+		switch_entry(l_0xc59d7f)	// 23
+		switch_entry(l_0xc59da0)	// 24
+		switch_entry(l_0xc59dbd)	// 25
+		switch_entry(l_0xc59de1)	// 26
+		switch_entry(l_0xc59e01)	// 27
+		switch_entry(l_0xc59e21)	// 28
+		switch_entry(l_0xc59e40)	// 29
+		switch_entry(l_0xc59e62)	// 30
+		switch_entry(l_0xc59e84)	// 31
+		switch_entry(l_0xc59eb2)	// 32
+		switch_entry(l_0xc59f08)	// 33
+		switch_entry(l_0xc59f44)	// 34
+		switch_entry(l_0xc59f60)	// 35
+		switch_entry(l_0xc59f80)	// 36
+		switch_entry(l_0xc59fa0)	// 37
+		switch_entry(l_0xc59fbd)	// 38
+		switch_entry(l_0xc59ff1)	// 39
+		switch_entry(l_0xc5a00c)	// 40
+		switch_entry(l_0xc5a036)	// 41
+		switch_entry(l_0xc5a05b)	// 42
+		switch_entry(l_0xc5a07e)	// 43
+		switch_entry(l_0xc5a0b3)	// 44
+		switch_entry(l_0xc5a0db)	// 45
+		switch_entry(l_0xc5a0fe)	// 46
+		switch_entry(l_0xc5a11a)	// 47
+		switch_entry(l_0xc5a154)	// 48
+		switch_entry(l_0xc5a17d)	// 49
+		switch_entry(l_0xc5a1ae)	// 50
+		switch_entry(l_0xc5a1cd)	// 51
+		switch_entry(l_0xc5a1ff)	// 52
+		switch_entry(l_0xc5a232)	// 53
+		switch_entry(l_0xc5a25e)	// 54
+		switch_entry(l_0xc5a27a)	// 55
+		switch_entry(l_0xc5a29c)	// 56
+		switch_entry(l_0xc5a2c2)	// 57
+		switch_entry(l_0xc5a2ec)	// 58
+		switch_entry(l_0xc5a318)	// 59
+		switch_entry(l_0xc5a342)	// 60
+		switch_entry(l_0xc5a36c)	// 61
+		switch_entry(l_0xc5a396)	// 62
+		switch_entry(l_0xc5a3c0)	// 63
+		switch_entry(l_0xc5a3ea)	// 64
+		switch_entry(l_0xc5a414)	// 65
+		switch_entry(l_0xc5a43e)	// 66
+		switch_entry(l_0xc5a465)	// 67
+		switch_entry(l_0xc5a48b)	// 68
+		switch_entry(l_0xc5a4b4)	// 69
+		switch_entry(l_0xc5a4cd)	// 70
+	goto(_events_exit)
+
+_events_exit:
+	window_clear
+	diam "Events menu off." wait
 	goto(new_debug_menu.debug_main)
 
 //------------------------------------------------------------------
 
 l_0xc599d0:
-	"{diam}{name(7)} runs away." wait linebreak
+	diam "{name(7)} runs away." wait linebreak
 	window_closeall
 	counter(10)
 	call(l_0xc5a4ec)
@@ -103,7 +107,7 @@ l_0xc599d0:
 	eob
 
 l_0xc599f4:
-	"{diam}Get the Minchs to their house." wait linebreak
+	diam "Get the Minchs to their house." wait linebreak
 	window_closeall
 	counter(11)
 	call(l_0xc5a4ec)
@@ -113,7 +117,7 @@ l_0xc599f4:
 	eob
 
 l_0xc59a15:
-	"{diam}Beat Captain Strong." wait linebreak
+	diam "Beat Captain Strong." wait linebreak
 	window_closeall
 	counter(13)
 	call(l_0xc5a4ec)
@@ -126,22 +130,22 @@ l_0xc59a15:
 	eob
 
 l_0xc59a40:
-	"{diam}Arriving to Twoson." wait linebreak
+	diam "Arriving to Twoson." wait linebreak
 	window_closeall
 	counter(14)
 	call(l_0xc5a4ec)
 	set(FLG_TLPT_TWSN)	// 210
 	give_and_return_location(1, BICYCLE)	// 0xB0, 176, Bicycle
 	give_and_return_location(1, SHYNESS_BOOK)	// 0xA4, 164, Shyness book
-	give_and_return_location(1,162)	// 0xA2, 162, Piggy nose
-	give_and_return_location(1,197)	// 0xC5, 197, Exit mouse
+	give_and_return_location(1, PIGGY_NOSE)	// 0xA2, 162, Piggy nose
+	give_and_return_location(1, EXIT_MOUSE)	// 0xC5, 197, Exit mouse
 	give_and_return_location(1, TOWN_MAP)	// 0xCA, 202, Town map
 	set(FLG_ITEM_ESCAPE_MOUSE)	// 512
 	warp(29)	// 0x1D
 	eob
 
 l_0xc59a72:
-	"{diam}First Runaway Show." wait linebreak
+	diam "First Runaway Show." wait linebreak
 	window_closeall
 	counter(22)
 	call(l_0xc5a4ec)
@@ -153,7 +157,7 @@ l_0xc59a72:
 	eob
 
 l_0xc59aa4:
-	"{diam}First encounter with Carpainter." wait linebreak
+	diam "First encounter with Carpainter." wait linebreak
 	window_closeall
 	counter(20)
 	call(l_0xc5a4ec)
@@ -162,7 +166,7 @@ l_0xc59aa4:
 	eob
 
 l_0xc59ace:
-	"{diam}Freeing {name(2)}." wait linebreak
+	diam "Freeing {name(2)}." wait linebreak
 	window_closeall
 	counter(21)
 	call(l_0xc5a4ec)
@@ -173,7 +177,7 @@ l_0xc59ace:
 	eob
 
 l_0xc59af5:
-	"{diam}Freeing the Runaway Bros. from their debt." wait linebreak
+	diam "Freeing the Runaway Bros. from their debt." wait linebreak
 	window_closeall
 	counter(22)
 	call(l_0xc5a4ec)
@@ -184,7 +188,7 @@ l_0xc59af5:
 	eob
 
 l_0xc59b25:
-	"{diam}Be captured by zombies." wait linebreak
+	diam "Be captured by zombies." wait linebreak
 	window_closeall
 	counter(23)
 	call(l_0xc5a4ec)
@@ -194,7 +198,7 @@ l_0xc59b25:
 	eob
 
 l_0xc59b45:
-	"{diam}Join with Bubble Monkey." wait linebreak
+	diam "Join with Bubble Monkey." wait linebreak
 	window_closeall
 	counter(30)
 	call(l_0xc5a4ec)
@@ -206,7 +210,7 @@ l_0xc59b45:
 	eob
 
 l_0xc59b78:
-	"{diam}Encounter with Tessie." wait linebreak
+	diam "Encounter with Tessie." wait linebreak
 	window_closeall
 	counter(31)
 	call(l_0xc5a4ec)
@@ -222,7 +226,7 @@ l_0xc59b78:
 	eob
 
 l_0xc59bb5:
-	"{diam}Ride the Sky Walker." wait linebreak
+	diam "Ride the Sky Walker." wait linebreak
 	window_closeall
 	counter(32)
 	call(l_0xc5a4ec)
@@ -232,7 +236,7 @@ l_0xc59bb5:
 	eob
 
 l_0xc59bd7:
-	"{diam}Runaway show at Topollo Theater." wait linebreak
+	diam "Runaway show at Topollo Theater." wait linebreak
 	window_closeall
 	counter(40)
 	call(l_0xc5a4ec)
@@ -242,7 +246,7 @@ l_0xc59bd7:
 	eob
 
 l_0xc59bfc:
-	"{diam}George Montague gives you the Diamond." wait linebreak
+	diam "George Montague gives you the Diamond." wait linebreak
 	window_closeall
 	counter(40)
 	call(l_0xc5a4ec)
@@ -261,7 +265,7 @@ l_0xc59bfc:
 	eob
 
 l_0xc59c39:
-	"{diam}Freeing the Runaway again." wait linebreak
+	diam "Freeing the Runaway again." wait linebreak
 	window_closeall
 	counter(41)
 	call(l_0xc5a4ec)
@@ -274,7 +278,7 @@ l_0xc59c39:
 	eob
 
 l_0xc59c67:
-	"{diam}Fight the Clumsy Robot." wait linebreak
+	diam "Fight the Clumsy Robot." wait linebreak
 	window_closeall
 	counter(43)
 	call(l_0xc5a4ec)
@@ -284,7 +288,7 @@ l_0xc59c67:
 	eob
 
 l_0xc59c84:
-	"{diam}Inside the Monotoly building." wait linebreak
+	diam "Inside the Monotoly building." wait linebreak
 	window_closeall
 	counter(43)
 	call(l_0xc5a4ec)
@@ -297,7 +301,7 @@ l_0xc59c84:
 	eob
 
 l_0xc59cb5:
-	"{diam}Ride the Sky Walker again." wait linebreak
+	diam "Ride the Sky Walker again." wait linebreak
 	window_closeall
 	counter(44)
 	call(l_0xc5a4ec)
@@ -308,7 +312,7 @@ l_0xc59cb5:
 	eob
 
 l_0xc59cd9:
-	"{diam}Eat the Magic cake." wait linebreak
+	diam "Eat the Magic cake." wait linebreak
 	window_closeall
 	counter(44)
 	call(l_0xc5a4ec)
@@ -321,7 +325,7 @@ l_0xc59cd9:
 	eob
 
 l_0xc59d06:
-	"{diam}Start your Mu training." wait linebreak
+	diam "Start your Mu training." wait linebreak
 	window_closeall
 	counter(50)
 	call(l_0xc5a4ec)
@@ -332,7 +336,7 @@ l_0xc59d06:
 	eob
 
 l_0xc59d30:
-	"{diam}See Venus performing." wait linebreak
+	diam "See Venus performing." wait linebreak
 	window_closeall
 	counter(50)
 	call(l_0xc5a4ec)
@@ -346,7 +350,7 @@ l_0xc59d30:
 	eob
 
 l_0xc59d61:
-	"{diam}Second encounter with Tessie." wait linebreak
+	diam "Second encounter with Tessie." wait linebreak
 	window_closeall
 	counter(51)
 	call(l_0xc5a4ec)
@@ -355,7 +359,7 @@ l_0xc59d61:
 	eob
 
 l_0xc59d7f:
-	"{diam}Confront Starman Deluxe." wait linebreak
+	diam "Confront Starman Deluxe." wait linebreak
 	window_closeall
 	counter(51)
 	call(l_0xc5a4ec)
@@ -365,7 +369,7 @@ l_0xc59d7f:
 	eob
 
 l_0xc59da0:
-	"{diam}Sail to Scarabia." wait linebreak
+	diam "Sail to Scarabia." wait linebreak
 	window_closeall
 	counter(52)
 	call(l_0xc5a4ec)
@@ -374,7 +378,7 @@ l_0xc59da0:
 	eob
 
 l_0xc59dbd:
-	"{diam}Arriving to the Lost Underworld." wait linebreak
+	diam "Arriving to the Lost Underworld." wait linebreak
 	window_closeall
 	counter(61)
 	call(l_0xc5a4ec)
@@ -384,7 +388,7 @@ l_0xc59dbd:
 	eob
 
 l_0xc59de1:
-	"{diam}Solve the Sphinx's puzzle." wait linebreak
+	diam "Solve the Sphinx's puzzle." wait linebreak
 	window_closeall
 	counter(52)
 	call(l_0xc5a4ec)
@@ -393,7 +397,7 @@ l_0xc59de1:
 	eob
 
 l_0xc59e01:
-	"{diam}Get the Yellow submarine." wait linebreak
+	diam "Get the Yellow submarine." wait linebreak
 	window_closeall
 	counter(54)
 	call(l_0xc5a4ec)
@@ -404,7 +408,7 @@ l_0xc59e01:
 	eob
 
 l_0xc59e21:
-	"{diam}Going to Lumine Hall." wait linebreak
+	diam "Going to Lumine Hall." wait linebreak
 	window_closeall
 	counter(60)
 	call(l_0xc5a4ec)
@@ -414,7 +418,7 @@ l_0xc59e21:
 	eob
 
 l_0xc59e40:
-	"{diam}Get the final melody." wait linebreak
+	diam "Get the final melody." wait linebreak
 	window_closeall
 	counter(61)
 	call(l_0xc5a4ec)
@@ -424,20 +428,28 @@ l_0xc59e40:
 	eob
 
 l_0xc59e62:
-	"{diam}Riding the Phase Distorter." wait linebreak
+	diam "Riding the Phase Distorter." wait linebreak
 	window_closeall
 	counter(63)
 	call(l_0xc5a4ec)
 	call(l_0xc5a526)
+	// Added so the NPCs and objects appear properly
+	set(FLG_WIN_OSCAR)		// 74
+	set(FLG_TLPT_DKFD)		// 220
+
 	warp(143)	// 0x8F
 	eob
 
 l_0xc59e84:
-	"{diam}Riding the Phase Distorter 2." wait linebreak
+	diam "Riding the Phase Distorter 2." wait linebreak
 	window_closeall
 	counter(63)
 	call(l_0xc5a4ec)
 	call(l_0xc5a526)
+	// Added so the NPCs and objects appear properly
+	set(FLG_WIN_OSCAR)		// 74
+	set(FLG_TLPT_DKFD)		// 220
+
 	set(FLG_ITEM_XYZ)		// 79
 	set(FLG_XYZ_OK)			// 134
 	set(FLG_SPACETUNNEL2_START)	// 133
@@ -446,23 +458,23 @@ l_0xc59e84:
 	eob
 
 l_0xc59eb2:
-	"{diam}Going through the Monkey Caves." wait linebreak
+	diam "Going through the Monkey Caves." wait linebreak
 	window_closeall
 	counter(43)
 	call(l_0xc5a4ec)
 	party_add(3)
-	give_and_return_location(1,224)	// 0xE0, 224, Skip sandwich
-	give_and_return_location(1,93)	// 0x5D, 93, Picnic lunch
-	give_and_return_location(1,90)	// 0x5A, 90, Hamburger
-	give_and_return_location(1,90)	// 0x5A, 90, Hamburger
-	give_and_return_location(1,233)	// 0xE9, 233, Double burger
-	give_and_return_location(1,95)	// 0x5F, 95, Pizza
-	give_and_return_location(1,95)	// 0x5F, 95, Pizza
-	give_and_return_location(1,97)	// 0x61, 97, Large pizza
-	give_and_return_location(1,127)	// 0x7F, 127, Wet towel
-	give_and_return_location(1,108)	// 0x6C, 108, Grownup drink
-	give_and_return_location(1,92)	// 0x5C, 92, Fresh Egg
-	give_and_return_location(1,140)	// 0x8C, 140, Ruler
+	give_and_return_location(1, SKIP_SANDWICH)	// 0xE0, 224, Skip sandwich
+	give_and_return_location(1, PICNIC_LUNCH)	// 0x5D, 93, Picnic lunch
+	give_and_return_location(1, HAMBURGER)	// 0x5A, 90, Hamburger
+	give_and_return_location(1, HAMBURGER)	// 0x5A, 90, Hamburger
+	give_and_return_location(1, DOUBLE_BURGER)	// 0xE9, 233, Double burger
+	give_and_return_location(1, PIZZA)	// 0x5F, 95, Pizza
+	give_and_return_location(1, PIZZA)	// 0x5F, 95, Pizza
+	give_and_return_location(1, LARGE_PIZZA)	// 0x61, 97, Large pizza
+	give_and_return_location(1, WET_TOWEL)	// 0x7F, 127, Wet towel
+	give_and_return_location(1, GROWNUP_DRINK)	// 0x6C, 108, Grownup drink
+	give_and_return_location(1, FRESH_EGG)	// 0x5C, 92, Fresh Egg
+	give_and_return_location(1, RULER)	// 0x8C, 140, Ruler
 	if flag FLG_KEY_ITEMS { set(FLG_ITEM_TACO_ERASER) }
 	else { give_and_return_location(1, PENCIL_ERASER) }	// 0xB8, 184, Pencil eraser
 	set(FLG_FOUR_MAID_APPEAR)	// 59
@@ -471,7 +483,7 @@ l_0xc59eb2:
 	eob
 
 l_0xc59f08:
-	"{diam}{name(4)} obtains PK Starstorm." wait linebreak
+	diam "{name(4)} obtains PK Starstorm." wait linebreak
 	window_closeall
 	counter(43)
 	call(l_0xc5a4ec)
@@ -484,7 +496,7 @@ l_0xc59f08:
 	eob
 
 l_0xc59f44:
-	"{diam}{name(2)}'s kidnap." wait linebreak
+	diam "{name(2)}'s kidnap." wait linebreak
 	window_closeall
 	counter(14)
 	call(l_0xc5a4ec)
@@ -493,17 +505,17 @@ l_0xc59f44:
 	eob
 
 l_0xc59f60:
-	"{diam}Meeting the Apple Kid." wait linebreak
+	diam "Meeting the Apple Kid." wait linebreak
 	window_closeall
 	counter(14)
 	call(l_0xc5a4ec)
 	set(FLG_TLPT_TWSN)	// 210
-	give_and_return_location(1,90)	// 0x5A, 90, Hamburger
+	give_and_return_location(1, HAMBURGER)	// 0x5A, 90, Hamburger
 	warp(147)	// 0x93
 	eob
 
 l_0xc59f80:
-	"{diam}The Bought House." wait linebreak
+	diam "The Bought House." wait linebreak
 	window_closeall
 	counter(12)
 	call(l_0xc5a4ec)
@@ -512,7 +524,7 @@ l_0xc59f80:
 	eob
 
 l_0xc59fa0:
-	"{diam}Onett Library." wait linebreak
+	diam "Onett Library." wait linebreak
 	window_closeall
 	counter(12)
 	call(l_0xc5a4ec)
@@ -520,7 +532,7 @@ l_0xc59fa0:
 	eob
 
 l_0xc59fbd:
-	"{diam}{name(4)} leaves the party." wait linebreak
+	diam "{name(4)} leaves the party." wait linebreak
 	window_closeall
 	counter(52)
 	call(l_0xc5a4ec)
@@ -533,7 +545,7 @@ l_0xc59fbd:
 	eob
 
 l_0xc59ff1:
-	"{diam}Fight {name(1)}'s Demon." wait linebreak
+	diam "Fight {name(1)}'s Demon." wait linebreak
 	window_closeall
 	counter(62)
 	call(l_0xc5a4ec)
@@ -542,38 +554,38 @@ l_0xc59ff1:
 	eob
 
 l_0xc5a00c:
-	"{diam}Face Carpainter with the Fraklin badge." wait linebreak
+	diam "Face Carpainter with the Fraklin badge." wait linebreak
 	window_closeall
 	counter(21)
 	call(l_0xc5a4ec)
-	give_and_return_location(1,1)	// Franklin badge
+	give_and_return_location(1, FRANKLIN_BADGE)	// Franklin badge
 	warp(119)	// 0x77
 	eob
 
 l_0xc5a036:
-	"{diam}Everdred's speech." wait linebreak
+	diam "Everdred's speech." wait linebreak
 	window_closeall
 	counter(41)
 	call(l_0xc5a4ec)
 	set(FLG_FOUR_DEPT_OK)	// 139
 	set(FLG_FOUR_TONCHIKI_APPEAR)	// 60
 	party_add(3)	// Add Jeff
-	give_and_return_location(1,90)	// 0x5A, 90, Hamburger
+	give_and_return_location(1, HAMBURGER)	// 0x5A, 90, Hamburger
 	warp(168)	// 0xA8
 	eob
 
 l_0xc5a05b:
-	"{diam}Give the Strawberry tofu to Electra." wait linebreak
+	diam "Give the Strawberry tofu to Electra." wait linebreak
 	window_closeall
 	counter(43)
 	call(l_0xc5a4ec)
 	party_add(3)
-	give_and_return_location(1,139)	// 0x8B, 139, Tofu machine
+	give_and_return_location(1, TOFU_MACHINE)	// 0x8B, 139, Tofu machine
 	warp(169)	// 0xA9
 	eob
 
 l_0xc5a07e:
-	"{diam}Give the banana to Mr. Spoon." wait linebreak
+	diam "Give the banana to Mr. Spoon." wait linebreak
 	window_closeall
 	counter(50)
 	call(l_0xc5a4ec)
@@ -588,7 +600,7 @@ l_0xc5a07e:
 	eob
 
 l_0xc5a0b3:
-	"{diam}Deep Darkness with Hawk eye." wait linebreak
+	diam "Deep Darkness with Hawk eye." wait linebreak
 	window_closeall
 	counter(53)
 	call(l_0xc5a4ec)
@@ -601,7 +613,7 @@ l_0xc5a0b3:
 	eob
 
 l_0xc5a0db:
-	"{diam}Mani Mani defeated, inside Borges' bar storage." wait linebreak
+	diam "Mani Mani defeated, inside Borges' bar storage." wait linebreak
 	window_closeall
 	counter(42)
 	call(l_0xc5a4ec)
@@ -611,7 +623,7 @@ l_0xc5a0db:
 	eob
 
 l_0xc5a0fe:
-	"{diam}Get the Shack key from Pirkle." wait linebreak
+	diam "Get the Shack key from Pirkle." wait linebreak
 	window_closeall
 	counter(12)
 	call(l_0xc5a4ec)
@@ -623,7 +635,7 @@ l_0xc5a0fe:
 	eob
 
 l_0xc5a11a:
-	"{diam}Leave Snow Wood." wait linebreak
+	diam "Leave Snow Wood." wait linebreak
 	window_closeall
 	counter(30)
 	call(l_0xc5a4ec)
@@ -635,25 +647,25 @@ l_0xc5a11a:
 	set(FLG_ITEM_GAUS)	// 88
 	set(FLG_WINS_START)	// 128
 	if not flag FLG_KEY_ITEMS { give_and_return_location(3, BAD_KEY_MACHINE) }	// 0xAC, 172, Bad key machine
-	give_and_return_location(3,36)	// 0x24, 36, Pop gun
-	give_and_return_location(3,75)	// 0x4B, 75, Holmes hat
+	give_and_return_location(3, POP_GUN)	// 0x24, 36, Pop gun
+	give_and_return_location(3, HOLMES_HAT)	// 0x4B, 75, Holmes hat
 	warp(184)	// 0xB8
 	eob
 
 l_0xc5a154:
-	"{diam}Threek Hotel." wait linebreak
+	diam "Threek Hotel." wait linebreak
 	window_closeall
 	counter(51)
 	call(l_0xc5a4ec)
 	set(FLG_SYS_PHONE_MYHOME2)	// 210
 	set(FLG_SYS_PHONE_PIZZA)	// 202
 	call(l_0xc5a526)
-	give_and_return_location(1,163)	// 0xA3, 163, For sale sign
+	give_and_return_location(1, FOR_SALE_SIGN)	// 0xA3, 163, For sale sign
 	warp(122)	// 0x7A
 	eob
 
 l_0xc5a17d:
-	"{diam}Tenda Village and Apple Kid's abduction." wait linebreak
+	diam "Tenda Village and Apple Kid's abduction." wait linebreak
 	window_closeall
 	counter(60)
 	call(l_0xc5a4ec)
@@ -669,7 +681,7 @@ l_0xc5a17d:
 	eob
 
 l_0xc5a1ae:
-	"{diam}Saturn Village after Belch's base." wait linebreak
+	diam "Saturn Village after Belch's base." wait linebreak
 	window_closeall
 	counter(35)
 	call(l_0xc5a4ec)
@@ -679,21 +691,21 @@ l_0xc5a1ae:
 	eob
 
 l_0xc5a1cd:
-	"{diam}Scaraba Hotel." wait linebreak
+	diam "Scaraba Hotel." wait linebreak
 	window_closeall
 	counter(60)
 	call(l_0xc5a4ec)
 	call(l_0xc5a526)
-	give_and_return_location(3,4)	// 4, Broken machine
-	give_and_return_location(3,5)	// 5, Broken gadget
-	give_and_return_location(3,6)	// 6, Broken air gun
-	give_and_return_location(3,7)	// 7, Broken spray can
-	give_and_return_location(3,161)	// 0xA1, 161, Defense spray
+	give_and_return_location(3, BROKEN_MACHINE)	// 4, Broken machine
+	give_and_return_location(3, BROKEN_GADGET)	// 5, Broken gadget
+	give_and_return_location(3, BROKEN_AIR_GUN)	// 6, Broken air gun
+	give_and_return_location(3, BROKEN_SPRAY_CAN)	// 7, Broken spray can
+	give_and_return_location(3, DEFENSE_SPRAY)	// 0xA1, 161, Defense spray
 	warp(138)	// 0x8A
 	eob
 
 l_0xc5a1ff:
-	"{diam}Final encounter with Porky and Giygas." wait linebreak
+	diam "Final encounter with Porky and Giygas." wait linebreak
 	counter(65)
 	call(l_0xc5a4ec)
 	call(l_0xc5a526)
@@ -706,7 +718,7 @@ l_0xc5a1ff:
 	eob
 
 l_0xc5a232:
-	"{diam}Use the Zombie paper." wait linebreak
+	diam "Use the Zombie paper." wait linebreak
 	window_closeall
 	counter(33)
 	call(l_0xc5a4ec)
@@ -721,7 +733,7 @@ l_0xc5a232:
 	eob
 
 l_0xc5a25e:
-	"{diam}Get the Zombie paper." wait linebreak
+	diam "Get the Zombie paper." wait linebreak
 	window_closeall
 	counter(33)
 	call(l_0xc5a4ec)
@@ -731,7 +743,7 @@ l_0xc5a25e:
 	eob
 
 l_0xc5a27a:
-	"{diam}Go to the Lost Underworld." wait linebreak
+	diam "Go to the Lost Underworld." wait linebreak
 	window_closeall
 	counter(61)
 	call(l_0xc5a4ec)
@@ -740,7 +752,7 @@ l_0xc5a27a:
 	eob
 
 l_0xc5a29c:
-	"{diam}Learn Teleport." wait linebreak
+	diam "Learn Teleport." wait linebreak
 	window_closeall
 	counter(43)
 	call(l_0xc5a4ec)
@@ -752,7 +764,7 @@ l_0xc5a29c:
 	eob
 
 l_0xc5a2c2:
-	"{diam}First trip to Dungeon man." wait linebreak
+	diam "First trip to Dungeon man." wait linebreak
 	window_closeall
 	counter(53)
 	call(l_0xc5a4ec)
@@ -764,7 +776,7 @@ l_0xc5a2c2:
 	eob
 
 l_0xc5a2ec:
-	"{diam}Reach Monotoly." wait linebreak
+	diam "Reach Monotoly." wait linebreak
 	window_closeall
 	counter(41)
 	call(l_0xc5a4ec)
@@ -777,10 +789,9 @@ l_0xc5a2ec:
 	eob
 
 // Prayer events from the original EarthBound
-// Commented out the calls to avoid compilation issues, this won't make it into the Remake either way.
 l_0xc5a318:
-	"{diam}{name(1)}'s family prayer.{wait}" end 	// linebreak
-	//window_closeall
+	diam "{name(1)}'s family prayer." wait linebreak
+	window_closeall
 	counter(65)
 	call(l_0xc5a4ec)
 	call(l_0xc5a526)
@@ -790,8 +801,8 @@ l_0xc5a318:
 	eob
 
 l_0xc5a342:
-	"{diam}Runaway Bros.' prayer." wait end 	// linebreak
-	//window_closeall
+	diam "Runaway Bros.' prayer." wait  linebreak
+	window_closeall
 	counter(65)
 	call(l_0xc5a4ec)
 	call(l_0xc5a526)
@@ -801,8 +812,8 @@ l_0xc5a342:
 	eob
 
 l_0xc5a36c:
-	"{diam}{name(2)}'s family prayer." wait end 	// linebreak
-	//window_closeall
+	diam "{name(2)}'s family prayer." wait linebreak
+	window_closeall
 	counter(65)
 	call(l_0xc5a4ec)
 	call(l_0xc5a526)
@@ -812,8 +823,8 @@ l_0xc5a36c:
 	eob
 
 l_0xc5a396:
-	"{diam}{name(8)}'s prayer." wait end 	// linebreak
-	//window_closeall
+	diam "{name(8)}'s prayer." wait linebreak
+	window_closeall
 	counter(65)
 	call(l_0xc5a4ec)
 	call(l_0xc5a526)
@@ -823,8 +834,8 @@ l_0xc5a396:
 	eob
 
 l_0xc5a3c0:
-	"{diam}Dalaam prayer." wait end 	// linebreak
-	//window_closeall
+	diam "Dalaam prayer." wait linebreak
+	window_closeall
 	counter(65)
 	call(l_0xc5a4ec)
 	call(l_0xc5a526)
@@ -834,8 +845,8 @@ l_0xc5a3c0:
 	eob
 
 l_0xc5a3ea:
-	"{diam}Frank's prayer." wait end 	// linebreak
-	//window_closeall
+	diam "Frank's prayer." wait linebreak
+	window_closeall
 	counter(65)
 	call(l_0xc5a4ec)
 	call(l_0xc5a526)
@@ -845,8 +856,8 @@ l_0xc5a3ea:
 	eob
 
 l_0xc5a414:
-	"{diam}Saturn Valley prayer.{wait}" end 	// linebreak
-	//window_closeall
+	diam "Saturn Valley prayer." wait linebreak
+	window_closeall
 	counter(65)
 	call(l_0xc5a4ec)
 	call(l_0xc5a526)
@@ -856,8 +867,8 @@ l_0xc5a414:
 	eob
 
 l_0xc5a43e:
-	"{diam}Ride the Sky Walker to Summers." wait end 	// linebreak
-	//window_closeall
+	diam "Ride the Sky Walker to Summers." wait  linebreak
+	window_closeall
 	counter(44)
 	call(l_0xc5a4ec)
 	party_add(3)
@@ -868,8 +879,8 @@ l_0xc5a43e:
 	eob
 
 l_0xc5a465:
-	"{diam}Leave Summers." wait end 	// linebreak
-	//window_closeall
+	diam "Leave Summers." wait linebreak
+	window_closeall
 	counter(50)
 	call(l_0xc5a4ec)
 	call(l_0xc5a526)
@@ -880,8 +891,8 @@ l_0xc5a465:
 	eob
 
 l_0xc5a48b:
-	"{diam}Meeting with Buzz Buzz." wait end 	// linebreak
-	//window_closeall
+	diam "Meeting with Buzz Buzz." wait  linebreak
+	window_closeall
 	counter(11)
 	call(l_0xc5a4ec)
 	party_add(5)	// Add Porky
@@ -891,7 +902,7 @@ l_0xc5a48b:
 	eob
 
 l_0xc5a4b4:
-	"{diam}The battle against Giygas is over..." wait linebreak
+	diam "The battle against Giygas is over..." wait linebreak
 	window_closeall
 	counter(66)
 	call(l_0xc5a4ec)
@@ -932,18 +943,20 @@ l_0xc5a4b4:
 	eob
 
 l_0xc5a4cd:
-	"{diam}The End... ?" wait linebreak
+	diam "The End... ?" wait linebreak
 	window_closeall
 	counter(11)
 	call(l_0xc5a4ec)
-	call(l_0xc9c7fa) eob
+	call(l_0xc9c7fa)
+	eob
 
 l_0xc9c7fa:
 	party_remove(2)	// Remove Paula
 	event(15)	// 0x0F, clear all event flags
 	OSS_on		// event(5)
 
-	// Set the Key items flag so the main menu doesn't open after selecting an event
+	// Set the Key items flag and its Use Item flag so the main menu doesn't open after selecting an event
+	set(FLG_KEY_ITEMS)	// 781, for Key items
 	set(FLG_TEMP_USEITEM)
 
 	set(FLG_MYHOME_TO_BE)	// 763
@@ -966,7 +979,7 @@ l_0xc9c7fa:
 	pause(180)
 	sprite2_spawn(437,779,-1)	// 0x01B5, 0x030B, 0xFF
 	warp(196)	// 0xC4
-	npc_freeze(255)
+	npc_freeze(-1)
 	pause(1)
 	sprite2_delete(437,6)	// 0x01B5, 6
 	show_party(1)	// 0xFF, 1
@@ -979,8 +992,11 @@ l_0xc9c7fa:
 
 l_0xc5a4ec:
 	event(15)	// 0x0F, Clear all event flags
-	// Set the Key items flag so the main menu doesn't open after selecting an event
+
+	// Set the Key items flag and its Use Item flag so the main menu doesn't open after selecting an event
+	set(FLG_KEY_ITEMS)	// 781, for Key items
 	set(FLG_TEMP_USEITEM)
+
 	call(banana.l_0xc59082)
 	call(l_0xc5a50a)
 	set(FLG_SYS_MONSTER_OFF)	// 11
